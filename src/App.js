@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Clock(props) {
   return (
@@ -7,11 +7,15 @@ function Clock(props) {
 }
 
 function CountingButton() {
-  const count = 0;
+  // const count = 0;
+  const [ count, setCount ] = useState(0);
+  useEffect(() => {
+    document.title = `${count} clicks`;
+  }, [ count ]);
   return (
     <div>
       <p>You clicked {count} times</p>
-      <button onClick={() => alert("The button was clicked.")}>
+      <button onClick={() => setCount(prevCount => prevCount + 1)}>
         Click me
       </button>
     </div>
