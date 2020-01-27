@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
 function Clock(props) {
+  const [ date, setDate ] = useState(new Date());
+  useEffect(() => {
+    const timerId = setInterval(() => setDate(new Date()), 1000);
+    return () => {
+      clearInterval(timerId);
+    };
+  }, []);
   return (
-    <h2>It is {props.date.toLocaleTimeString()}.</h2>
+    <h2>It is {date.toLocaleTimeString()}.</h2>
   );
 }
 
@@ -26,6 +33,7 @@ function App() {
   return (
     <div>
       <CountingButton />
+      <Clock />
     </div>
   );
 }
